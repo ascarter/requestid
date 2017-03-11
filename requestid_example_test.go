@@ -10,8 +10,8 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	rid, ok := ctx.Value(ridKey).(string)
-	log.Println("Running hello handler")
+	rid, _ := requestid.FromContext(r.Context())
+	log.Println("Running hello handler:", rid)
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 }
 
